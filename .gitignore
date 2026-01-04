@@ -1,0 +1,66 @@
+# Environment variables - NEVER commit these!
+.env
+
+# Large files (exceeds GitHub's 100MB limit)
+Academic Rules and Regulations 2025-26.pdf
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+.venv/
+ENV/
+env/
+
+# Vector store data (can be regenerated)
+data/vectorstore/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node/Frontend
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/build/
+frontend/dist/
+.npm
+*.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Misc
+*.bak
+*.tmp

@@ -1,0 +1,77 @@
+/* ===========================================
+   App Layout - Fixed Scrolling
+   =========================================== */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: var(--sp-4);
+  overflow: hidden;
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.input-section {
+  padding: var(--sp-4) var(--sp-6);
+  background: var(--surface);
+  border-top: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* === Responsive === */
+@media (max-width: 640px) {
+  .main-container {
+    padding: var(--sp-2);
+  }
+
+  .chat-container {
+    border-radius: var(--radius-lg);
+  }
+
+  .input-section {
+    padding: var(--sp-3) var(--sp-4);
+  }
+}
