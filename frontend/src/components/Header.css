@@ -1,91 +1,158 @@
 /* ===========================================
-   Header - Clean Professional
+   Header Styles - Premium Design
    =========================================== */
 
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: var(--sp-3) var(--sp-6);
-    background: var(--primary);
-    color: var(--text-white);
-    flex-shrink: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
 }
 
 .header-brand {
     display: flex;
     align-items: center;
     gap: var(--sp-3);
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+}
+
+.header-brand:hover {
+    opacity: 0.8;
 }
 
 .header-logo {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    background: white;
-    padding: 4px;
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
 }
 
 .header-logo img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .header-text h1 {
-    font-family: var(--font-main);
-    font-size: 18px;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
     font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
 }
 
 .header-text p {
-    font-size: 12px;
-    opacity: 0.8;
+    font-size: 0.8rem;
+    color: var(--text-muted);
 }
 
 .header-actions {
     display: flex;
+    align-items: center;
     gap: var(--sp-2);
 }
 
 .header-btn {
-    width: 36px;
-    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.15);
-    border: none;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-3);
+    background: transparent;
+    border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    color: white;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
     cursor: pointer;
-    font-size: 16px;
-    transition: background 0.2s;
+    transition: all var(--transition-fast);
 }
 
 .header-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: var(--surface-alt);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
-.header-btn.clear-btn {
-    background: rgba(239, 68, 68, 0.3);
+.header-btn.icon-only {
+    padding: var(--sp-2);
+    width: 40px;
+    height: 40px;
 }
 
-.header-btn.clear-btn:hover {
-    background: rgba(239, 68, 68, 0.5);
+.btn-label {
+    display: none;
 }
 
+@media (min-width: 640px) {
+    .btn-label {
+        display: inline;
+    }
+}
+
+.btn-primary-sm {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    color: white;
+    font-weight: 500;
+    padding: var(--sp-2) var(--sp-4);
+}
+
+.btn-primary-sm:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow-sm);
+    color: white;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+}
+
+/* === Responsive === */
 @media (max-width: 640px) {
     .header {
         padding: var(--sp-3) var(--sp-4);
     }
 
-    .header-text h1 {
-        font-size: 16px;
-    }
-
     .header-text p {
         display: none;
+    }
+
+    .header-logo {
+        width: 36px;
+        height: 36px;
+    }
+
+    .header-text h1 {
+        font-size: 1rem;
     }
 }

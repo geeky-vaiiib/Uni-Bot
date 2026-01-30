@@ -2,11 +2,14 @@ import './QuickSuggestions.css'
 
 const QUICK_SUGGESTIONS = [
     "Attendance requirement?",
-    "What is Dasoha?",
     "Placement packages?",
     "Hostel fees?",
     "Admission process?",
-    "Grading system?"
+    "Grading system?",
+    "Library timings?",
+    "Bus routes?",
+    "Dress code?",
+    "Exam schedule?"
 ]
 
 function QuickSuggestions({ onSelect }) {

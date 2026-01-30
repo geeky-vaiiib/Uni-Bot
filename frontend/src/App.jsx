@@ -5,6 +5,9 @@ import InputArea from './components/InputArea'
 import ModeSelector from './components/ModeSelector'
 import WelcomeScreen from './components/WelcomeScreen'
 import QuickSuggestions from './components/QuickSuggestions'
+import LandingPage from './pages/LandingPage'
+import LoginPage from './pages/LoginPage'
+import SignupPage from './pages/SignupPage'
 import './App.css'
 
 const API_BASE = 'http://localhost:8000'
@@ -13,16 +16,43 @@ function App() {
   const [messages, setMessages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [mode, setMode] = useState('student')
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState('dark')
   const [hasStarted, setHasStarted] = useState(false)
+  const [currentPage, setCurrentPage] = useState('landing')
+  const [user, setUser] = useState(null)
+  const [pendingQuery, setPendingQuery] = useState(null)
 
   // Apply theme to document
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 
+  // Handle pending query when entering chat
+  useEffect(() => {
+    if (currentPage === 'chat' && pendingQuery) {
+      // Small delay to ensure components are mounted and we don't trigger state updates during render
+      const timer = setTimeout(() => {
+        handleSendMessage(pendingQuery)
+        setPendingQuery(null)
+      }, 500)
+      return () => clearTimeout(timer)
+    }
+  }, [currentPage, pendingQuery])
+
   const toggleTheme = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light')
+  }
+
+  // Updated navigation to accept params
+  const handleNavigate = (page, params = {}) => {
+    setCurrentPage(page)
+    if (params.query) {
+      setPendingQuery(params.query)
+    }
+  }
+
+  const handleLogin = (userData) => {
+    setUser(userData)
   }
 
   const handleSendMessage = async (question) => {
@@ -92,17 +122,42 @@ function App() {
     setHasStarted(false)
   }
 
+  const handleLogout = () => {
+    setUser(null)
+    setCurrentPage('landing')
+    setMessages([])
+    setHasStarted(false)
+  }
+
+  // Render based on current page
+  if (currentPage === 'landing') {
+    return <LandingPage onNavigate={handleNavigate} />
+  }
+
+  if (currentPage === 'login') {
+    return <LoginPage onNavigate={handleNavigate} onLogin={handleLogin} />
+  }
+
+  if (currentPage === 'signup') {
+    return <SignupPage onNavigate={handleNavigate} onLogin={handleLogin} />
+  }
+
+  // Chat page
   return (
     <div className="app">
+      <div className="animated-bg"></div>
       <Header
         theme={theme}
         onToggleTheme={toggleTheme}
         onClearChat={clearChat}
         hasMessages={messages.length > 0}
+        user={user}
+        onLogout={handleLogout}
+        onNavigate={handleNavigate}
       />
 
       <main className="main-container">
-        <div className="chat-container">
+        <div className="chat-container glass">
           {!hasStarted ? (
             <WelcomeScreen onQuickQuestion={handleQuickQuestion} />
           ) : (
@@ -130,4 +185,3 @@ function App() {
 }
 
 export default App
-
